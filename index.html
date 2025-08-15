@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+  />
+  <title>Breakout Deluxe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="topbar">
+      <h1>Breakout Deluxe</h1>
+      <div class="controls">
+        <button id="btnStart" aria-label="Start/Pause">▶️ / ⏸</button>
+        <button id="btnReset" aria-label="Reset">🔄</button>
+
+        <label class="speed">
+          Speed
+          <input type="range" id="speedSlider" min="0.7" max="1.6" step="0.05" value="1" />
+        </label>
+
+        <label class="levelsel">
+          Level
+          <select id="levelSelect"></select>
+        </label>
+
+        <label class="portraitToggle" title="Force portrait-first UI on wide screens">
+          <input type="checkbox" id="forcePortrait" />
+          <span>Portrait UI</span>
+        </label>
+      </div>
+    </header>
+
+    <section class="board">
+      <canvas id="game" width="960" height="540" aria-label="Breakout canvas"></canvas>
+
+      <div class="hud">
+        <div class="scorebox">
+          <span>Score:</span><strong id="score">0</strong>
+          <span class="sep"></span>
+          <span>Lives:</span><strong id="lives">3</strong>
+          <span class="sep"></span>
+          <span>Level:</span><strong id="level">1</strong>
+          <span class="sep"></span>
+          <span id="levelName">Starter</span>
+        </div>
+        <div class="power-row" id="powerRow" aria-hidden="true"></div>
+        <div class="hint">Drag or use ⬅️ ➡️ · ● to launch · Tap lasers button when available</div>
+      </div>
+    </section>
+
+    <!-- Portrait-first / Mobile controls -->
+    <div class="portrait-controls" id="portraitControls">
+      <div class="side left-side">
+        <button class="big-btn" id="leftBtn">⬅</button>
+        <button class="big-btn" id="laserBtn" title="Fire lasers" aria-hidden="true">🔫</button>
+      </div>
+      <div class="center-area">
+        <button class="big-btn launch" id="launchBtn">●</button>
+      </div>
+      <div class="side right-side">
+        <button class="big-btn" id="rightBtn">➡</button>
+        <button class="big-btn" id="extraBtn" aria-hidden="true">★</button>
+      </div>
+    </div>
+
+    <footer class="foot">
+      <small>© 2025 Alekha Pradhan. All rights reserved.❤️</small>
+    </footer>
+  </main>
+
+  <!-- Inline fallback levels (used if fetch fails) -->
+  <script type="application/json" id="inline-levels">
+  {
+    "levels":[
+      {
+        "name":"Starter",
+        "rows":8,
+        "cols":12,
+        "grid":[
+          "111111111111",
+          "1M22222L2221",
+          "133333333333",
+          "144444444444",
+          "100000000001",
+          "1000S0W000001",
+          "144444444444",
+          "133333333333"
+        ]
+      },
+      {
+        "name":"Chaos",
+        "rows":9,
+        "cols":12,
+        "grid":[
+          "LLLLLLLLLLLL",
+          "1M2M3M4M3M2M1",
+          "1W0S0S0W0S0S1",
+          "122222222221",
+          "133333333331",
+          "100000000001",
+          "144444444444",
+          "100000000001",
+          "111111111111"
+        ]
+      },
+      {
+        "name":"Fortress",
+        "rows":9,
+        "cols":12,
+        "grid":[
+          "XXXXXXXXXXXX",
+          "X0000000000X",
+          "X0111111101X",
+          "X0100000101X",
+          "X01033M0301X",
+          "X0100000101X",
+          "X0111111101X",
+          "X0000000000X",
+          "XXXXXXXXXXXX"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script src="game.js"></script>
+</body>
+</html>
